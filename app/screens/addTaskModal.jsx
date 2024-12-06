@@ -83,8 +83,8 @@ const TaskModal = () => {
           <NeumorphicContainer
           styling={{
               height: "auto",
-              
           }}
+          
           component={(
               <TextInput
               inputMode="text"
@@ -119,25 +119,33 @@ const TaskModal = () => {
               color={"green"}
            onPress={() => {
               if (taskText.trim() && categoryText.trim()) {
-                const listCati = categories.map(category => {
-                  console.log("List of categories: ", category.category);
-                  
-                  return category.category
-                });
-                console.log(listCati);
                 
-                //check if listCati contains the input not done yet
-                //the dispatch payload currently defines categoryId instead of categoryText change it
+                //check if listCati contains the input 
+                if(categories.some(cati => cati.category.toLowerCase().trim() === categoryText.toLowerCase().trim())){
+                  //gets the category 
+                  const inputCategory = categories.find(cati => cati.category.toLowerCase().trim() === categoryText.toLowerCase().trim());
+                  
+                  //gets the category id
+                  const catiId = inputCategory.id;
+                  console.log( "category Id",catiId);
+                  
 
+                  //then adds it to that category
                   dispatch({
                     status : "add", payload:{
                     text: taskText, 
-                    categoryText: categoryText,
+                    categoryId: catiId,
                     }
                   });
+                  
                   setTask(""); // Clear the input
                   setCategory(""); // Clear the input
                   setIsModalVisible(false); // Close the modal
+                  return;
+                }else{
+                  alert("Not Among Categories please select category")
+                }
+                  
                 } else {
                   alert("Please input a Task AND Category.");
                 }

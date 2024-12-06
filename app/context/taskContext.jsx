@@ -74,13 +74,18 @@ function taskReducer(state, action) {
                     
             );
 
+            
         // Add Task to a category
         case "add":
             //check for the task category
             return state.map(category =>
-                category.id === action.payload.categoryId
-                    //return a new list containing old array with modified item but first check to modify category object
-                    ? ({
+                
+                {
+                    if(category.id === action.payload.categoryId){
+                        
+                         //return a new list containing old array with modified item but first check to modify category object
+                     return ({
+                        
                         ...category,
                         tasks: ([
                             //new object
@@ -94,8 +99,12 @@ function taskReducer(state, action) {
                             ...category.tasks
 
                         ])
-                    })
-                    : category
+                    }
+                )
+                    }
+                   
+                   return category
+                }
             )
 
         //like task

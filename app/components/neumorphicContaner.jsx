@@ -26,17 +26,17 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.5,
     // shadowRadius: 2,
     
-    // shadowColor: "#FFFFFF", // Dark shadow
-    // shadowOffset: { width: 6, height: 6 },
-    // shadowOpacity: 0.2,
-    // shadowRadius: 2,
-    // elevation: 6, // For Android
+    shadowColor: "#FFFFFF", // Dark shadow
+    shadowOffset: { width: -6, height: -6 },
+    shadowOpacity:1,
+    shadowRadius: 2,
+    elevation: 6, // For Android
 
     
     shadowColor: "#0e0a0a", // Dark shadow
-    shadowOffset: { width: -6, height: -6 },
+    shadowOffset: { width: 6, height: 6 },
     shadowOpacity: 0.6,
-    shadowRadius: 4,
+    shadowRadius: 6,
     elevation: 6, // For Android
 
   },
