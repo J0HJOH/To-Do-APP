@@ -1,5 +1,5 @@
 import { ScrollView, Text, View } from "react-native";
-import NeumorphicContainer from "../neumorphicContaner";
+import NeumorphicContainer from "../components/neumorphicContaner";
 import { TextInput } from "react-native-gesture-handler";
 
 const HomeScreen = () => {

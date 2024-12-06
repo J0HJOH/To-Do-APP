@@ -1,8 +1,73 @@
 [
-    { "category" : "Education"},
-    { "category" : "Work"},
-    { "category" : "Personal"},
-    { "category" : "Health"},
-    { "category" : "Travel"},
-    { "category" : "Shopping"}
+    { 
+        "id": 1,
+        "category": "Education",
+        "tasks": [
+            {"id": 101, "task" : "Read Geography", "done" : true, "fav": false
+            },
+            {"id": 102,"task" : "Watch Study Tutorials", "done" : true, "fav" : true
+            },
+            { "id": 103, "task" : "Give lessons", "done" : false, "fav": false
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "category": "Work",
+        "tasks": [
+            {"id": 201, "task" : "Go to work", "done" : true, "fav": false
+            },
+            {"id": 202,"task" : "Deliver Goods", "done" : true, "fav" : true
+            },
+            { "id": 203, "task" : "Pay for Order", "done" : false, "fav": false
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "category": "Personal",
+        "tasks": [
+            {"id": 301,"task" : "Wash cloth", "done" : true, "fav" : true
+            },
+            { "id": 302, "task" : "Dry my hair", "done" : false, "fav": false
+            },
+            { "id": 303, "task" : "Go to the gym", "done": false, "fav": true
+            },
+            { "id": 304, "task" : "Go Hiking", "done": false, "fav": true
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "category": "Health",
+        "tasks": [
+         
+            { "id": 401, "task" : "Eat Food", "done": false, "fav": false
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "category": "Travel",
+        "tasks": [
+            {"id": 501, "task" : "Travel Dubai", "done" : true, "fav": false
+            },
+            {"id": 502,"task" : "Travel to Switzerland", "done" : true, "fav" : true
+            },
+            { "id": 503, "task" : "Scholarship Trip", "done" : false, "fav": false
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "category": "Shopping",
+        "tasks": [
+            { "id": 601, "task" : "Buy Fruits", "done": false, "fav": true
+            },
+            { "id": 602, "task" : "Buy Vegetables", "done": false, "fav": true
+            },
+            { "id": 603, "task" : "Buy Drinks", "done": false, "fav": true
+            }
+        ]
+    }
 ]

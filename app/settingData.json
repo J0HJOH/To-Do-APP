@@ -1,0 +1,18 @@
+[
+    {
+        "id" : 1,
+        "title" : "Account"
+    },
+    {
+        "id" : 2,
+        "title" : "Privacy and Security"
+    },
+    {
+        "id" : 3,
+        "title" : "About"
+    },
+    {
+        "id" : 4,
+        "title" : "Log Out"
+    }
+]

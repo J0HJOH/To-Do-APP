@@ -1,12 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import NeumorphicContainer from "./neumorphicContaner";
-import { SearchBar } from "react-native-screens";
 
 
 
-
-const SearchContainer = ()=>{
+const SearchContainer = ({
+  /**The value that is gotten from the user  */
+  value, 
+  /** a callBack function that is called when the user types */
+  onChangeText})=>{
 
 return (
     <NeumorphicContainer
@@ -28,10 +30,11 @@ return (
            editable
            //going to use 
            placeholder="Search Here..."
+           value= {value}
+           onChangeText={onChangeText}
            autoCapitalize="sentences"
-
+           multiline
            autoComplete="name-family"
-           clearButtonMode="while-editing"
            cursorColor={"#130f0f"}
            placeholderTextColor={"black"}
            style={styles.inputField}
@@ -56,7 +59,10 @@ const styles = StyleSheet.create({
         flexDirection:"row"
     },
     inputField :{
-    paddingStart:10
+    paddingStart:20,
+    fontSize: 20,
+    width: "100%",
+    color:"black"
 
     }
     
