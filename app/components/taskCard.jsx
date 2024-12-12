@@ -6,7 +6,7 @@ import {
 
   TouchableOpacity
 } from "react-native";
-import { useTasksDispatch, useTasks } from "../context/taskContext";
+import { useTasks } from "../context/taskContext";
 import { useState } from "react";
 
 const TaskCard = ({
@@ -21,13 +21,13 @@ const TaskCard = ({
   secondComponent }) => {
 
   //using the dispatch  context 
-  const dispatch = useTasksDispatch();
+  const { dispatch } = useTasks();
 
   return (
     <View style={[styles.card, styles.taskItem, cardStyle,
     { padding: 20, }
     ]}
-    
+
     >
 
 
@@ -63,7 +63,7 @@ const TaskCard = ({
               payload: {
                 categoryId: categoryId,
                 taskId: taskId
-            }
+              }
             })}
           >
 
@@ -77,12 +77,13 @@ const TaskCard = ({
         :
         eachTask.done && (
           <TouchableOpacity
-            onPress={() => dispatch({ 
+            onPress={() => dispatch({
               status: "delete",
               payload: {
                 categoryId: categoryId,
                 taskId: taskId
-            } })}
+              }
+            })}
           >
 
             <IconSymbol name="trash" color={"red"} />
