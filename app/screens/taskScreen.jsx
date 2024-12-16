@@ -7,21 +7,21 @@ import TaskScrollView from '../components/taskScrollView'
 
 
 const TaskScreen = () => {
-    const taskList = useTasks();
-    return (
-        <ScrollView style={{
-            flex: 1,
-            padding: 10,
-            marginBottom: "20%",
-            backgroundColor: "#E0E0E0"
-        }}>
-           
-           <TaskScrollView
-           taskList={taskList}
-           />
-            
-        </ScrollView>
-    )
+  const { tasksList: taskList } = useTasks();
+  return (
+    <View style={{
+      flex: 1,
+      padding: 10,
+      marginBottom: "20%",
+      backgroundColor: "#E0E0E0"
+    }}>
+
+      <TaskScrollView
+        taskList={taskList}
+      />
+
+    </View>
+  )
 };
 
 export default TaskScreen;

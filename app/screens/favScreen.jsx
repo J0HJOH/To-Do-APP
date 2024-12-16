@@ -9,29 +9,29 @@ import TaskScrollView from '../components/taskScrollView'
 
 const FavScreen = () => {
 
-    const CategoryList = useTasks();
-    //const [isFavCard, setIsFavCard] = useState(false);
+  const { tasksList: CategoryList } = useTasks();
+  //const [isFavCard, setIsFavCard] = useState(false);
 
 
 
-    return (
-        <ScrollView style={{
-            flex: 1,
-            padding: 10,
-            marginBottom: "20%",
-            backgroundColor: "#E0E0E0"
-        }}>
-            <TaskScrollView
-            taskList={CategoryList}
-            isFavCard={true}
-            secondComponent={(
-                <Text style={styles.time}>10:30</Text>
-            )}
-            cardStyle={styles.favCard}
-            
-            />
-            
-            {/* <FlatList
+  return (
+    <ScrollView style={{
+      flex: 1,
+      padding: 10,
+      marginBottom: "20%",
+      backgroundColor: "#E0E0E0"
+    }}>
+      <TaskScrollView
+        taskList={CategoryList}
+        isFavCard={true}
+        secondComponent={(
+          <Text style={styles.time}>10:30</Text>
+        )}
+        cardStyle={styles.favCard}
+
+      />
+
+      {/* <FlatList
                 data={favList}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item, index }) => {
@@ -50,20 +50,20 @@ const FavScreen = () => {
                 }}
 
             /> */}
-        </ScrollView>
-    )
+    </ScrollView>
+  )
 };
 
 const styles = StyleSheet.create({
-    time: {
-        color: "black",
-        fontSize: 13,
-    },
-    favCard: {
-        height: "20%",
-        backgroundColor: "#d3d1d1",
-        opacity: 0.6,
-    }
+  time: {
+    color: "black",
+    fontSize: 13,
+  },
+  favCard: {
+    height: "20%",
+    backgroundColor: "#d3d1d1",
+    opacity: 0.6,
+  }
 })
 
 export default FavScreen;
