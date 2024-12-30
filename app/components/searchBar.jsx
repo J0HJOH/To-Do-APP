@@ -1,6 +1,9 @@
+
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import NeumorphicContainer from "./neumorphicContaner";
+import { StyleSheet,TextInput, View } from "react-native";
+import NeumorphicContainer from "./NeumorphicContaner";
+import React from "react";
+import PropTypes from 'prop-types';
 
 
 
@@ -9,6 +12,12 @@ const SearchContainer = ({
   value, 
   /** a callBack function that is called when the user types */
   onChangeText})=>{
+
+    SearchContainer.propTypes ={
+          value : PropTypes.string,
+          onChangeText : PropTypes.func
+          
+        };
 
 return (
     <NeumorphicContainer

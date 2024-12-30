@@ -1,26 +1,25 @@
 import { NavigationContainer, NavigationIndependentTree } from "@react-navigation/native";
-import { Stack } from "expo-router";
-import { createStackNavigator } from "@react-navigation/stack";
-import Index from "./index";
-import NeumorphicHeader from "./components/headerComponent"
+import Index from "./screens/index";
+import NeumorphicHeader from "./components/HeaderComponent";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "./screens/homeScreen";
-import TaskScreen from "./screens/taskScreen";
-import FavScreen from "./screens/favScreen";
-import SettingsScreen from "./screens/settingsScreen";
+import TaskScreen from "./screens/TaskScreen";
+import FavScreen from "./screens/FavScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { View, TouchableOpacity } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { View } from "react-native";
 import { Dimensions } from "react-native";
-import { StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import TaskProvider from "./context/taskContext";
+import TaskProvider from "./context/TaskContext";
+import SignUpScreen from './auth/screens/SignUpScreen';
+import LoginScreen from './auth/screens/LoginScreen';
 
 
 
 const dimensions = Dimensions.get("screen");
-const MyStack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 const BottomWrapper = () => {
   return (
@@ -29,7 +28,6 @@ const BottomWrapper = () => {
         header: ({ navigation, route, options }) => (
           <NeumorphicHeader
             title={"To-Do App"}
-            leftIcon={null}
             navigation={navigation}
           />
         ),
@@ -134,27 +132,14 @@ const BottomWrapper = () => {
     </BottomTab.Navigator>)
 };
 
-
-export default function RootLayout() {
-
-
-
-
-
-  return <TaskProvider>
-    <NavigationIndependentTree>
-
-      <NavigationContainer >
-        <Drawer.Navigator
-
+const DrawerNav = () => {
+  return(
+    <Drawer.Navigator
           screenOptions={{
             headerShown: false,
             overlayColor: "#E0E0E0"
-
-          }}
-
-        >
-
+          }}>
+            
           <Drawer.Screen
             name="firstScreen"
             options={{
@@ -163,61 +148,46 @@ export default function RootLayout() {
           />
 
         </Drawer.Navigator>
-
-        {/* <MyStack.Navigator
-
-screenOptions={{
-  // headerTransparent : true,
-  // headerTintColor:"white",
-  
- header: ({ navigation, route, options }) => (
-  <NeumorphicHeader title={options.title || "Default Title"} />
-),
-headerStyle: { backgroundColor: "#E0E0E0" }, 
-}}
->
-
-  <MyStack.Screen
-  name="index"
-  component={Index}
-  options={{title : "To-Do App"}}
-  
-  />
-</MyStack.Navigator> */}
+  );
+};
 
 
+export default function RootLayout() {
+  return (
+    <TaskProvider>
+    <NavigationIndependentTree>
 
+      <NavigationContainer >
+        <Stack.Navigator
+        screenOptions={{
+          headerBackButtonDisplayMode : "minimal",
+          headerTransparent: true,
+          headerTitleStyle: {
+            color: "transparent"
+          }
+        }}
+        >
+          <Stack.Screen
+          name="Signup"
+          component={SignUpScreen}
+          />
+          <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          />
+          
+          <Stack.Screen
+          name="Main"
+          component={DrawerNav}
+          options={{
+            headerShown : false
+          }}
+          />
+        </Stack.Navigator>
+        
+        
       </NavigationContainer>
-
-
     </NavigationIndependentTree>
-
   </TaskProvider>
-
-  // <Stack 
-  // //use this screenOptions to apply styles to all the screens in the app
-  // screenOptions={{
-  //   headerTintColor: "blue",
-
-  // }}
-  // >
-  //   <Stack.Screen
-  //   name="index"
-  //   options={{
-  //     title :"Home",
-  //     headerTransparent:  true
-
-  //   }}
-
-  //   />
-  //   <Stack.Screen
-  //   name="myApp"
-  //   options={{
-  //     title :"Second Screen",
-  //     headerTransparent:  true
-
-  //   }}
-
-  //   />
-  // </Stack>;
+  )
 }

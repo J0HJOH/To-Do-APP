@@ -9,19 +9,64 @@ import {
   TouchableWithoutFeedback,
   Keyboard
 } from "react-native";
-import NeumorphicContainer from "../components/neumorphicContaner";
+import NeumorphicContainer from "../components/NeumorphicContaner";
+import { SelectList } from 'react-native-dropdown-select-list'
+import React, { useState } from "react";
+import { useTasks } from "../context/TaskContext";
 
-import { useState } from "react";
-import { useTasks } from "../context/taskContext";
+
 
 
 const TaskModal = () => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [taskText, setTask] = useState("");
-  const [categoryText, setCategory] = useState("");
-  const { dispatch, tasksList: categories } = useTasks();
+  const [selected, setSelected] = useState(null);
+  //const [categoryText, setCategory] = useState("");
+  const { dispatch, categoryList: categories } = useTasks();
+  const dataOptions =
+    categories.map((cati) => ({
+      key: cati.id,
+      value: cati.category
+    }));
 
+
+  const handleOnSave = () => {
+    if (taskText.trim() && selected) {
+
+      console.log("sel:", selected);
+      console.log("cat:", categories);
+
+      //check if listCati contains the input 
+      if (categories.some(cati => cati.category.toLowerCase().trim() === selected.toLowerCase().trim())) {
+        //gets the category 
+        const selectedCategory = categories.find(cati => cati.category.toLowerCase().trim() === selected.toLowerCase().trim());
+
+        //gets the category id
+        const catiId = selectedCategory.id;
+        console.log("category Id", catiId);
+
+
+        //then adds it to that category
+        dispatch({
+          status: "add", payload: {
+            text: taskText,
+            categoryId: catiId,
+          }
+        });
+
+        setTask(""); // Clear the input
+        setSelected(null); // Clear the input
+        setIsModalVisible(false); // Close the modal
+        return;
+      } else {
+        alert("Not Among Categories please select category")
+      }
+
+    } else {
+      alert("Please input a Task AND select a Category.");
+    }
+  }
 
   if (!isModalVisible) {
     return (
@@ -55,15 +100,14 @@ const TaskModal = () => {
             <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
 
               <View style={styles.modalContentContainer}>
+                {/* Header */}
                 <Text style={styles.modalTitle}>Add a Task</Text>
 
-                {/* Input Field */}
-
-                {/* Task Input*/}
+                {/* Task Input Field*/}
                 <NeumorphicContainer
                   styling={{
                     height: "auto",
-
+                    marginBottom: "5%"
                   }}
                   component={(
                     <TextInput
@@ -79,25 +123,15 @@ const TaskModal = () => {
                   )}
                 />
 
-                {/* Category Input */}
-
-                <NeumorphicContainer
-                  styling={{
-                    height: "auto",
+                {/* Category Selection */}
+                <SelectList
+                  setSelected={(val) => setSelected(val)}
+                  data={dataOptions}
+                  save="value"
+                  inputStyles={{
+                    fontSize: 22
                   }}
-
-                  component={(
-                    <TextInput
-                      inputMode="text"
-                      textAlignVertical="top"
-                      style={styles.input}
-                      placeholder="Input category"
-                      multiline
-                      placeholderTextColor={"black"}
-                      value={categoryText}
-                      onChangeText={(text) => setCategory(text)}
-                    />
-                  )}
+                  boxStyles={styles.boxStyl}
                 />
 
 
@@ -105,53 +139,11 @@ const TaskModal = () => {
                 {/* Save Task Button */}
 
                 <TouchableOpacity
-                  style={[styles.fab,
-                  {
-                    bottom: 0,
-                    width: "auto",
-                    height: "auto",
-                    padding: 10,
-                    marginTop: 20,
-                    right: "auto",
-                    position: "relative",
-                    shadowOffset: { width: 4, height: -4 },
-                  }]}
+                  style={[styles.fab, styles.savBtn]}
                 >
                   <Button title="Save"
                     color={"green"}
-                    onPress={() => {
-                      if (taskText.trim() && categoryText.trim()) {
-
-                        //check if listCati contains the input 
-                        if (categories.some(cati => cati.category.toLowerCase().trim() === categoryText.toLowerCase().trim())) {
-                          //gets the category 
-                          const inputCategory = categories.find(cati => cati.category.toLowerCase().trim() === categoryText.toLowerCase().trim());
-
-                          //gets the category id
-                          const catiId = inputCategory.id;
-                          console.log("category Id", catiId);
-
-
-                          //then adds it to that category
-                          dispatch({
-                            status: "add", payload: {
-                              text: taskText,
-                              categoryId: catiId,
-                            }
-                          });
-
-                          setTask(""); // Clear the input
-                          setCategory(""); // Clear the input
-                          setIsModalVisible(false); // Close the modal
-                          return;
-                        } else {
-                          alert("Not Among Categories please select category")
-                        }
-
-                      } else {
-                        alert("Please input a Task AND Category.");
-                      }
-                    }}
+                    onPress={() => { handleOnSave() }}
                   />
 
                 </TouchableOpacity>
@@ -172,13 +164,6 @@ const TaskModal = () => {
 
 const styles = StyleSheet.create({
 
-  background: {
-    flex: 1,
-    padding: 20,
-    marginTop: -15,
-    marginBottom: "9%",
-    backgroundColor: "#E0E0E0",
-  },
   modalContentContainer: {
     backgroundColor: "#E0E0E0",
     width: "100%",
@@ -193,6 +178,16 @@ const styles = StyleSheet.create({
     shadowRadius: 2
 
   },
+  savBtn: {
+    bottom: 0,
+    width: "auto",
+    height: "auto",
+    padding: 10,
+    marginTop: 20,
+    right: "auto",
+    position: "relative",
+    shadowOffset: { width: 4, height: -4 },
+  },
 
   modalTitle: {
     fontSize: 18,
@@ -206,53 +201,25 @@ const styles = StyleSheet.create({
     fontSize: 25,
     padding: 20,
   },
+  boxStyl: {
+    width: "70%",
+    borderWidth: 0,
+    alignItems: "center",
+    height: 60,
+    backgroundColor: "#E0E0E0", // Match container background for seamless effect
+    borderRadius: 30,
+    shadowColor: "#0e0a0a", // Dark shadow
+    shadowOffset: { width: 6, height: 6 },
+    shadowOpacity: 0.6,
+    shadowRadius: 6,
+    elevation: 6,// For Android
+
+  },
   overlay: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "white",
     alignItems: "center",
     backgroundColor: "#00000099",
-  },
-  card: {
-    flex: 1,
-    backgroundColor: "#E0E0E0",
-    borderRadius: 16,
-    marginBlock: 10,
-    margin: 5,
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0e0a0a",
-        shadowOffset: { width: -4, height: -4 },
-        shadowOpacity: 0.2,
-        shadowRadius: 6,
-        //light
-        shadowColor: "#0f0e0e",
-        shadowOffset: { width: 4, height: 4 },
-        shadowOpacity: 0.6,
-        shadowRadius: 2
-      },
-      android: {
-        elevation: 5,
-        shadowColor: "#a71919",
-        shadowOffset: { width: -4, height: -4 },
-        shadowOpacity: 0.5,
-        shadowRadius: 4,
-        //light
-        shadowColor: "#faf7f7",
-        shadowOffset: { width: 4, height: 4 },
-        shadowOpacity: 1,
-        shadowRadius: 2
-      },
-      web: {
-        shadowColor: "#333",
-        shadowOffset: {
-          width: 10,
-          height: 15
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 4
-      }
-    })
   },
   fab: {
     position: "absolute",
@@ -270,21 +237,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 4, height: 4 },
     shadowOpacity: 0.6,
     shadowRadius: 2
-
-  },
-
-  topText: {
-    fontSize: 20,
-    color: "#918484",
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  titleText: {
-    paddingStart: 10,
-    fontSize: 15,
-    textDecorationStyle: "double",
-    color: "black",
-    fontWeight: "600"
 
   },
 });

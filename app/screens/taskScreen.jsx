@@ -1,13 +1,11 @@
-import { Text, View, ScrollView } from "react-native";
-import NeumorphicContainer from "../components/neumorphicContaner";
-import { FlatList } from "react-native-gesture-handler";
-import { useTasks } from "../context/taskContext";
-import TaskCard from "../components/taskCard";
-import TaskScrollView from '../components/taskScrollView'
-
+import { View } from "react-native";
+import { useTasks } from "../context/TaskContext";
+import TaskScrollView from '../components/TaskScrollView';
+import React from "react";
 
 const TaskScreen = () => {
-  const { tasksList: taskList } = useTasks();
+  const { categoryList: categoryList } = useTasks();
+  const tasks = categoryList.flatMap((item) => item.tasks);
   return (
     <View style={{
       flex: 1,
@@ -17,7 +15,7 @@ const TaskScreen = () => {
     }}>
 
       <TaskScrollView
-        taskList={taskList}
+        taskList={tasks}
       />
 
     </View>

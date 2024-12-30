@@ -1,10 +1,16 @@
 import React from "react";
-import NeumorphicContainer from "./neumorphicContaner"
+import NeumorphicContainer from "./NeumorphicContaner";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { IconSymbol } from "@/app-example/components/ui/IconSymbol";
 import { Ionicons } from "@expo/vector-icons";
+import PropTypes from 'prop-types';
 
-const NeumorphicHeader = ({ title, leftIcon , navigation}) => {
+
+const NeumorphicHeader = ({ title, navigation}) => {
+  NeumorphicHeader.propTypes ={
+    title : PropTypes.string,
+    navigation : PropTypes.any
+    
+  };
   return (
     <View style={styles.container}>
       <NeumorphicContainer
@@ -55,10 +61,10 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 6, // For Android
     // Inner light shadow
-    shadowColor: "#FFFFFF",
-    shadowOffset: { width: -4, height: -4 },
-    shadowOpacity: 0.7,
-    shadowRadius: 2,
+    // shadowColor: "#FFFFFF",
+    // shadowOffset: { width: -4, height: -4 },
+    // shadowOpacity: 0.7,
+    // shadowRadius: 2,
   },
   title: {
     color: "#555",

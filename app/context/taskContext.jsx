@@ -1,28 +1,20 @@
-import { createContext, useContext, useReducer } from "react";
-import initialTasks from '../constants/categoryData.json'
+import React, { createContext, useContext, useReducer } from "react";
+import initialTasks from '../constants/categoryData.json';
+import PropTypes from "prop-types";
 
-//global declare the context you wnt to create
+
+//globally declare the context you want to create
 const TaskContext = createContext();
-// const initialTasks = [
-//     {id:1, task : "Go to work", done : true, fav: false},
-//     {id:2, task : "Wash cloth", done : true, fav : true},
-//     { id:3,task : "Dry my hair", done : false, fav: false},
-//     { id:4, task : "Eat Food", done: false, fav: false},
-//     { id:5, task : "Go to the gym", done: false, fav: true},
-//     { id: 6, task : "Go shopping", done: false, fav: true}
-//   ];
-
-//this reducer returns the new state  of the old state that was stored
-//after the action has been performed 
 
 const generateTaskId = (category) =>
   category.tasks.length > 0
     ? category.tasks.slice(-1)[0].id + 1
     : category.id * 10 + 1;
 
+//this reducer returns the new state  of the old state that was stored
+//after the action has been performed 
 
 function taskReducer(state, action) {
-  console.log("Reducer called with action:", action);
 
   switch (action.status) {
     //toggle button
@@ -137,25 +129,31 @@ function taskReducer(state, action) {
 
 export default function TaskProvider({ children }) {
   //define the data whose context you want to keep track of
-  const [tasksList, dispatch] = useReducer(taskReducer, initialTasks);
+  const [categoryList, dispatch] = useReducer(taskReducer, initialTasks);
 
   //then define the Ui components that would be using the context this TaskProvider 
   //will be providing, the context value will be passed by the prop value
   return (
-    <TaskContext.Provider value={{ tasksList, dispatch }}>
+    <TaskContext.Provider value={{ categoryList, dispatch }}>
       {children}
     </TaskContext.Provider>
   )
 };
 
+
+TaskProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
 export function useTasks() {
   const context = useContext(TaskContext);
 
+  //Ensures this context is not used outside its consumer
   if (!context) {
     throw new Error(
       'useTasks must be used within a TaskProvider',
     );
-  }
+  };
 
   return context;
 }

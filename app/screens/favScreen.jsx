@@ -1,58 +1,31 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import NeumorphicContainer from "../components/neumorphicContaner";
-import { FlatList } from "react-native-gesture-handler";
-import { useTasks } from "../context/taskContext";
-import TaskCard from "../components/taskCard";
-import { useMemo, useState } from "react";
-import TaskScrollView from '../components/taskScrollView'
-
+import { StyleSheet, Text, View } from "react-native";
+import { useTasks } from "../context/TaskContext";
+import React from "react";
+import TaskScrollView from '../components/TaskScrollView';
 
 const FavScreen = () => {
+  const { categoryList: CategoryList } = useTasks();
 
-  const { tasksList: CategoryList } = useTasks();
-  //const [isFavCard, setIsFavCard] = useState(false);
-
-
-
+  //flatten all task then filter the favorites
+  const favList = CategoryList.flatMap((item) => item.tasks).filter(task => task.fav);
   return (
-    <ScrollView style={{
+    <View style={{
       flex: 1,
       padding: 10,
       marginBottom: "20%",
       backgroundColor: "#E0E0E0"
     }}>
       <TaskScrollView
-        taskList={CategoryList}
+        taskList={favList}
         isFavCard={true}
         secondComponent={(
           <Text style={styles.time}>10:30</Text>
         )}
-        cardStyle={styles.favCard}
-
-      />
-
-      {/* <FlatList
-                data={favList}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item, index }) => {
-                    return (
-
-                        <TaskCard
-                            index={index}
-                            isFavCard={() => setIsFavCard(true)}
-                            item={item}
-                            cardStyle={styles.favCard}
-                            secondComponent={(
-                                <Text style={styles.time}>10:30</Text>
-                            )}
-                        />
-                    )
-                }}
-
-            /> */}
-    </ScrollView>
+        cardStyle={styles.favCard} />
+    </View>
   )
 };
+
 
 const styles = StyleSheet.create({
   time: {
@@ -64,6 +37,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#d3d1d1",
     opacity: 0.6,
   }
-})
-
+});
 export default FavScreen;

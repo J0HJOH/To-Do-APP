@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import NeumorphicContainer from "../components/neumorphicContaner";
+import NeumorphicContainer from "../components/NeumorphicContaner";
 import { IconSymbol } from "@/app-example/components/ui/IconSymbol";
 import settingsData from "../constants/settingData.json"
+import React from "react";
 
 const getIconName = (title) => {
   switch (title) {
@@ -18,10 +19,11 @@ const getIconName = (title) => {
   }
 };
 
+
 const SettingsScreen = () => {
   return (
     <View style={styles.background}>
-      {settingsData.map((setting, index) =>
+      {settingsData.map((setting) =>
       (
         <NeumorphicContainer
           key={setting.id}

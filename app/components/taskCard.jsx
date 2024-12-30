@@ -1,23 +1,24 @@
 
 import { IconSymbol } from "@/app-example/components/ui/IconSymbol";
 import {
-  Button, Text, View, Platform,
+  Text, View, Platform,
   StyleSheet,
 
   TouchableOpacity
 } from "react-native";
-import { useTasks } from "../context/taskContext";
-import { useState } from "react";
+import { useTasks } from "../context/TaskContext";
+import React from "react";
+import PropTypes from 'prop-types';
+import { TaskPropType } from '../model/CategoryModel'
 
 const TaskCard = ({
   //this is the category task list
   eachTask,
   taskId,
-  //index of the the particular category
-  index,
-  categoryId,
-  isFavCard,
-  cardStyle,
+  // The category Id
+  categoryId = Number(eachTask.id.toString()[0]),
+  isFavCard = false,
+  cardStyle = {},
   secondComponent }) => {
 
   //using the dispatch  context 
@@ -96,6 +97,17 @@ const TaskCard = ({
 }
 
 
+TaskCard.propTypes = {
+  eachTask: TaskPropType.isRequired,
+  taskId: PropTypes.number,
+  categoryId: PropTypes.number,
+  isFavCard: PropTypes.bool,
+  cardStyle: PropTypes.object,
+  secondComponent: PropTypes.element
+
+};
+
+
 //return the list of task
 
 
@@ -116,10 +128,6 @@ const styles = StyleSheet.create({
     margin: 5,
     ...Platform.select({
       ios: {
-        shadowColor: "#0e0a0a",
-        shadowOffset: { width: -4, height: -4 },
-        shadowOpacity: 0.2,
-        shadowRadius: 6,
         //light
         shadowColor: "#0f0e0e",
         shadowOffset: { width: 4, height: 4 },
@@ -127,11 +135,7 @@ const styles = StyleSheet.create({
         shadowRadius: 2
       },
       android: {
-        elevation: 5,
-        shadowColor: "#a71919",
-        shadowOffset: { width: -4, height: -4 },
-        shadowOpacity: 0.5,
-        shadowRadius: 4,
+
         //light
         shadowColor: "#faf7f7",
         shadowOffset: { width: 4, height: 4 },
