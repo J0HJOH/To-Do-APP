@@ -1,13 +1,28 @@
-# Welcome to your Expo app 👋
+# TASK MANAGEMENT App 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is an [Expo](https://expo.dev) Task Management project using [`React-Native`]().
+This app logs in User using firebase Auth and allows user to store the daily tasks and sets reminders for them 
+when Task is due. It helps users organize their daily activities as well as keeping them ontop of their day to day lives without missing a beat.
+
+## View Live Version
+In order to see a live view. Check it out here on [Appetize.io]()
 
 ## Get started
 
 1. Install dependencies
 
    ```bash
-   npm install
+   npm install [All these packages... 
+   [react-native-dotenv,
+    react-native-dropdown-select-list,
+    react-native-toast-message,
+    firebase,
+    @react-native-community/datetimepicker,
+    @react-navigation/bottom-tabs,
+    @react-navigation/drawer,
+    @react-navigation/native,
+    @react-navigation/stack,
+    prop-types,]]
    ```
 
 2. Start the app
@@ -23,28 +38,10 @@ In the output, you'll find options to open the app in a
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+## Social Plaforms
 
-When you're ready, run:
+Join see our Other apps Check out.
 
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [TikTacToe App with java on YouTube](https://youtu.be/u5Y6t150cZk): View our open source platform and contribute.
+- [LinkedIn Profile](www.linkedin.com/in/joan-okereke-2abb59246): DM for App development with React Native, Flutter and Kotlin.
