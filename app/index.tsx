@@ -5,6 +5,13 @@ import { Button, Text, View } from "react-native";
 export default function Index() {
 
   const navigation = useNavigation();
+  // Task 
+  // 1. Implement auth flows
+
+// 2. Implement saving the user state in AsyncStorage
+
+// 3: BONUS: use a secure storage instead of AsyncStorage
+// 4 :dont use react-navigation
 
   return (
     <View
