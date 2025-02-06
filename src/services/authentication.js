@@ -8,6 +8,7 @@ import {
 
 import { Alert } from 'react-native';
 import Toast from 'react-native-toast-message';
+import { router } from 'expo-router';
 import { auth } from './firebase';
 import { isValidEmail, isValidPhone, isValidPassword } from './validation';
 // import PropTypes from 'prop-types';
@@ -46,7 +47,7 @@ export const handlePasswordInput = (
 };
 
 // Sign Up Function
-export const handleSignUp = async (email, password, phone, name, navigator) => {
+export const handleSignUp = async (email, password, phone, name) => {
   if (!email?.trim() || !password?.trim()) {
     // empty fields
     Alert.alert('Empty Fields');
@@ -114,7 +115,7 @@ export const handleSignUp = async (email, password, phone, name, navigator) => {
       text1: 'Success',
       text2: `Account created for ${auth.currentUser.displayName}`,
     });
-    navigator.navigate('Login');
+    router.push('/login');
   } catch (e) {
     if (e.code === 'auth/network-request-failed') {
       Toast.show({
@@ -136,7 +137,7 @@ export const handleSignUp = async (email, password, phone, name, navigator) => {
 };
 
 // Sign In Function
-export const handleSignIn = (email, password, navigator) => {
+export const handleSignIn = (email, password) => {
   if (!email?.trim() || !password?.trim()) {
     // empty fields
     Alert.alert('Empty Fields');
@@ -158,7 +159,7 @@ export const handleSignIn = (email, password, navigator) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       Alert.alert('Success', `Welcome ${userCredential.user.displayName}`);
-      navigator.navigate('Main');
+      router.replace('/main');
     })
     .catch((error) => {
       if (error.code === 'auth/network-request-failed') {
