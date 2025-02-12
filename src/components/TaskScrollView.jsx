@@ -24,6 +24,13 @@ import TaskCard from './TaskCard';
  * i used the sectionList component to render the taskList in the index(HomePage)
  */
 
+TaskScrollView.propTypes = {
+    taskList: PropTypes.arrayOf(TaskPropType).isRequired,
+    isFavCard: PropTypes.bool,
+    cardStyle: PropTypes.object,
+    secondComponent: PropTypes.element,
+};
+
 function TaskScrollView({
     taskList,
     isFavCard = false,
@@ -71,13 +78,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center', // Centers the empty component vertically
     },
 });
-
-TaskScrollView.propTypes = {
-    // this is the category task list
-    taskList: PropTypes.arrayOf(TaskPropType).isRequired,
-    isFavCard: PropTypes.bool,
-    cardStyle: PropTypes.object,
-    secondComponent: PropTypes.element,
-};
 
 export default TaskScrollView;

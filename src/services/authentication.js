@@ -159,7 +159,8 @@ export const handleSignIn = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       Alert.alert('Success', `Welcome ${userCredential.user.displayName}`);
-      router.replace('/main');
+      // not getting the correct route in sitemap
+      router.replace('/(tabs)');
     })
     .catch((error) => {
       if (error.code === 'auth/network-request-failed') {

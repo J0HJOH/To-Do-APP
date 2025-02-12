@@ -10,7 +10,7 @@ function CategorySectionScreen() {
   const { categoryName } = useLocalSearchParams();
   const { categoriesAndTasks } = useTasks();
   const collectionTask = categoriesAndTasks
-    .find((category) => category.category === categoryName).tasks || [];
+    .find((category: { category: any; }) => category.category === categoryName).tasks || [];
 
   return (
 
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 
   sectionHeader: {
     alignItems: 'center',
-    displayl: 'flex',
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: '15%',

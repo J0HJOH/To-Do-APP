@@ -50,7 +50,7 @@ export default function Index() {
       // return list first that you want to edit
       const searchFilter = categoriesAndTasks.map(
         // changing each object in the list to return new list
-        (category) => ({
+        (category: { tasks: any[]; }) => ({
           ...category,
           // edited paramenter
           // return a new list that removes all task that doesn't contain searchstring
@@ -72,13 +72,13 @@ export default function Index() {
   );
 
   // // Extract categories
-  const allCategoriesObject = filteredCategory.map((item) => ({
+  const allCategoriesObject = filteredCategory.map((item: { id: any; category: any; }) => ({
     id: item.id,
     category: item.category,
   }));
 
   // Flatten all tasks
-  const allTasksObject = filteredCategory.flatMap((item) => item.tasks);
+  const allTasksObject = filteredCategory.flatMap((item: { tasks: any; }) => item.tasks);
 
   const sections = [
     {
@@ -94,7 +94,7 @@ export default function Index() {
   ];
 
   // render Categories section
-  const renderGrid = ({ data }) => (
+  const renderGrid = ({ data }: { data: { id: number; category: string }[] }) => (
     <FlatList
       data={data}
       keyExtractor={(item) => item.id.toString()}
@@ -102,7 +102,7 @@ export default function Index() {
       renderItem={({ item }) => (
         <View style={styles.card}>
           <Link
-            href={{ pathname: '/category', params: { categoryName: item.category } }}
+            href={{ pathname: '/../src/app/category', params: { categoryName: item.category } }}
           >
             <CategoryContainers
               title={item.category}
@@ -115,12 +115,12 @@ export default function Index() {
   );
 
   // Each section header
-  const renderSectionHeader = ({ section: { title } }) => (
+  const renderSectionHeader = ({ section: { title } }: { section: { title: string } }) => (
     // Section Header
     <View style={styles.sectionHeader}>
       <Text style={styles.topText}>{title}</Text>
       {title === 'Today\'s Tasks' && (
-        <Link href="/tasks">
+        <Link href={{ pathname: '/../src/app/tasks' }}>
           <Text style={[styles.topText, { fontSize: 15 }]}>See all</Text>
         </Link>
       )}
@@ -128,7 +128,7 @@ export default function Index() {
   );
 
   // render each task
-  const renderItem = ({ item, section }) => {
+  const renderItem = ({ item, section }: { item: any, section: { type: string } }) => {
     // categories
     if (section.type === 'Categories') {
       // item is an array of objects
@@ -172,7 +172,7 @@ export default function Index() {
             // keeping track of the input by storing it in the saerchString variable
             value={searchString}
             // what to do when you start editing
-            onChangeText={(value) => {
+            onChangeText={(value: React.SetStateAction<string>) => {
               setSearchString(value);
             }}
           />
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
   // },
   sectionHeader: {
     alignItems: 'center',
-    displayl: 'flex',
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

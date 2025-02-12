@@ -8,7 +8,26 @@ function TaskScreen() {
   const { categoriesAndTasks } = useTasks();
 
   // Flatten all tasks
-  const allTasksObject = categoriesAndTasks.flatMap((item) => item.tasks);
+  interface Task {
+    id: string;
+    title: string;
+    completed: boolean;
+    task: string;
+    done: boolean;
+    fav: boolean;
+  }
+
+  interface Category {
+    id: string;
+    name: string;
+    tasks: Task[];
+  }
+
+  interface TaskContextType {
+    categoriesAndTasks: Category[];
+  }
+
+  const allTasksObject: Task[] = categoriesAndTasks.flatMap((item: Category) => item.tasks);
   return (
     <View style={{
       flex: 1,

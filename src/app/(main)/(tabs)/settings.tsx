@@ -7,21 +7,21 @@ import {
 } from 'react-native';
 import React from 'react';
 import NeumorphicContainer from '../../../components/NeumorphicContainer';
-import { IconSymbol } from '@/app-example/components/ui/IconSymbol';
+import { Ionicons } from '@expo/vector-icons';
 import settingsData from '../../../constants/settingData.json';
 
-const getIconName = (title) => {
+const getIconName = (title: string) => {
   switch (title) {
     case 'Account':
-      return 'person.circle.fill';
+      return 'person-add-outline';
     case 'Privacy and Security':
-      return 'lock';
+      return 'lock-closed';
     case 'About':
-      return 'questionmark.circle.fill';
+      return 'scan-circle';
     case 'Log Out':
-      return 'rectangle.portrait.and.arrow.forward';
+      return 'arrow-forward-circle';
     default:
-      return 'person.circle';
+      return 'person-add-outline';
   }
 };
 
@@ -39,7 +39,7 @@ function SettingsScreen() {
             <View style={styles.settingsItem}>
               <View style={styles.firstRow}>
 
-                <IconSymbol
+                <Ionicons
                   name={getIconName(setting.title)}
                   size={30}
                   color="red"
@@ -48,8 +48,8 @@ function SettingsScreen() {
               </View>
 
               <TouchableOpacity>
-                <IconSymbol
-                  name="arrowshape.forward.fill"
+                <Ionicons
+                  name="arrow-forward-sharp"
                   color="red"
                 />
               </TouchableOpacity>

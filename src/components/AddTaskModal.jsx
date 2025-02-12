@@ -20,10 +20,10 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import React, { useState } from 'react';
 import Toast from 'react-native-toast-message';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import NeumorphicContainer from '../../components/NeumorphicContainer';
-import { IconSymbol } from '@/app-example/components/ui/IconSymbol';
-import IconText from '../../components/IconText';
-import { useTasks } from '../../context/TaskContext';
+import { Ionicons } from '@expo/vector-icons';
+import NeumorphicContainer from './NeumorphicContainer';
+import IconText from './IconText';
+import { useTasks } from '../context/TaskContext';
 
 function TaskModal() {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -212,7 +212,7 @@ function TaskModal() {
                 >
                   <IconText
                     icon={(
-                      <IconSymbol
+                      <Ionicons
                         name="calendar"
                         size={25}
                         style={{ marginRight: 15 }}
@@ -258,7 +258,7 @@ function TaskModal() {
 
                   <IconText
                     icon={(
-                      <IconSymbol
+                      <Ionicons
                         name="clock.arrow.circlepath"
                         size={25}
                         style={{ marginRight: 15 }}
@@ -304,7 +304,7 @@ function TaskModal() {
                 <Text style={styles.modalTitle}>Reminder</Text>
                 <IconText
                   icon={(
-                    <IconSymbol
+                    <Ionicons
                       name="alarm.waves.left.and.right.fill"
                       size={25}
                       style={{ marginRight: 15 }}

@@ -14,8 +14,8 @@ import {
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { RectButton, Swipeable } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
 import { TaskPropType } from '../model/CategoryModel';
-import { IconSymbol } from '@/app-example/components/ui/IconSymbol';
 import { useTasks } from '../context/TaskContext';
 import EditTaskModal from './EditTaskModal';
 
@@ -42,7 +42,7 @@ function TaskCard({
                 deleteTask(categoryId, taskId);
             }}
       >
-        <IconSymbol name="trash" color="white" />
+        <Ionicons name="trash" color="white" />
       </RectButton>
     );
 
@@ -52,7 +52,7 @@ function TaskCard({
         style={styles.rightAction}
         onPress={openModal}
       >
-        <IconSymbol name="pencil" color="white" />
+        <Ionicons name="pencil" color="white" />
       </RectButton>
     );
 
@@ -70,7 +70,7 @@ function TaskCard({
             <TouchableOpacity
               onPress={() => toggleDone(categoryId, taskId)}
             >
-              <IconSymbol
+              <Ionicons
                 name={
                                 eachTask.done ? 'circle.circle.fill' : 'circle'
                             }
@@ -91,7 +91,7 @@ function TaskCard({
             onPress={() => toggleFav(categoryId, taskId)}
           >
 
-            <IconSymbol
+            <Ionicons
               name={
                             eachTask.fav ? 'heart.fill' : 'heart'
                         }

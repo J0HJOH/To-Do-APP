@@ -21,9 +21,9 @@ import React, { useState } from 'react';
 import Toast from 'react-native-toast-message';
 import PropTypes from 'prop-types';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Ionicons } from '@expo/vector-icons';
 import NeumorphicContainer from './NeumorphicContainer';
-import { IconSymbol } from '@/app-example/components/ui/IconSymbol';
-import IconText from './IconText';
+  import IconText from './IconText';
 import { useTasks } from '../context/TaskContext';
 
 function EditTaskModal({
@@ -161,7 +161,7 @@ function EditTaskModal({
                 >
                   <IconText
                     icon={(
-                      <IconSymbol
+                      <Ionicons
                         name="calendar"
                         size={25}
                         style={{ marginRight: 15 }}
@@ -207,7 +207,7 @@ function EditTaskModal({
 
                   <IconText
                     icon={(
-                      <IconSymbol
+                      <Ionicons
                         name="clock.arrow.circlepath"
                         size={25}
                         style={{ marginRight: 15 }}
